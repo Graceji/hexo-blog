@@ -10,6 +10,6 @@ categories: '生活'
 
 {% asset_img xiaowang.jpeg wangzai %}
 
-![旺仔](https://graceji.github.io/hexo-blog/img/wangzai.jpeg)
+<!-- ![旺仔](https://graceji.github.io/hexo-blog/img/wangzai.jpeg) -->
 
 
