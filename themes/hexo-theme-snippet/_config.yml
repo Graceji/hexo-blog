@@ -65,7 +65,7 @@ jsonContent:
             </p>
 
 ## 社交设置
-社交:
+social:
  - name: Github
    icon: git
    href: //github.com/Graceji/hexo-blog
