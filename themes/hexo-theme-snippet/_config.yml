@@ -6,19 +6,19 @@
 ## menu
 menu:
 - page: home
-  url: /
+  url: /hexo-blog/
   icon:
 - page: 前端
-  url: /categories/前端/
+  url: /hexo-blog/categories/前端/
   icon:
 - page: 后端
-  url: /categories/后端/
+  url: /hexo-blog/categories/后端/
   icon:
-- page: 工具
-  url: /categories/工具/
+- page: 生活
+  url: /hexo-blog/categories/生活/
   icon:
 - page: 时间轴
-  url: /archives/
+  url: /hexo-blog/archives/
   icon:
 
 ## favicon
@@ -57,7 +57,7 @@ jsonContent:
     tags: false
 
 ## 网站公告设置
-notification: |-
+公告: |-
             <p>
                 主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br/>
                 主题使用：<a href="https://github.com/shenliyang/hexo-theme-snippet/blob/master/README.md#常见问题" title="" target="_blank">常见使用问题</a> <br/>
@@ -65,22 +65,22 @@ notification: |-
             </p>
 
 ## 社交设置
-social:
+社交:
  - name: Github
    icon: git
-   href: //github.com/shenliyang
+   href: //github.com/Graceji/hexo-blog
  - name: 邮箱
    icon: envelope-o
-   href: mailto:snippet@91h5.cc
+   href: 80709412@qq.com
  - name: 联系QQ
    icon: qq
-   href: /
+   href: /hexo-blog/
  - name: 微信
    icon: weixin
-   href: /
+   href: /hexo-blog/
  - name: QQ群
    icon: users
-   href: /
+   href: /hexo-blog/
  - name: RSS
    icon: feed
    href: /atom.xml
