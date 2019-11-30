@@ -40,6 +40,7 @@ console.log(jsSquares[1]); // 9
 ![执行结果](https://upload-images.jianshu.io/upload_images/3817318-af7140b7ccbb4b16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 用seq创建的对象，其实代码块没有被执行，只是被声明了，代码在get(1)的时候才会实际被执行，取到index=1的数之后，后面的就不会再执行了，所以在filter时，第三次就取到了要的数，从4-8都不会再执行。如果在实际业务中，数据量非常大，一个array的长度是几百，要操作这样一个array，如果应用惰性操作的特性，会节省非常多的性能。
+
 #### 3. 常用API介绍
 ```
 // Map(): 原生object转Map对象 (只会转换第一层，注意和fromJS区别)
@@ -89,7 +90,9 @@ const data6 = immutableData.updateIn(['c', 'd'], function(x) { return x+4 })   /
 const data7 = immutableData.delete('a')   // data7中的 a 不存在
 const data8 = immutableData.deleteIn(['c',  'd'])   // data8中的 d 不存在
 ```
+
 #### 4. 优缺点
+
 **优点：**
 - 降低mutable带来的复杂度
 - 节省内存
@@ -101,9 +104,13 @@ const data8 = immutableData.deleteIn(['c',  'd'])   // data8中的 d 不存在
 - 需要重新学习api
 - 资源包大小增加（源码5000行左右）
 - 容易与原生对象混淆：由于api与原生不同，混用的话容易出错。
+
 #### 5. 在react+redux中集成immutable.js
+
 react有个重要的性能优化的点就是shouldComponentUpdate，返回true代码该组件要re-render，false则不重新渲染。简单的场景可以直接使用===去判断this.props和nextProps是否相等，但当props是一个复杂的结构时，===肯定是没用的。
+
 ##### 5.1 集成前的准备
+
 首先需要确定哪些数据需要使用不可变数据，哪些数据要使用原生js数据结构，哪些地方需要做互相转换。
 - 在redux中，全局state必须是immutable的，这是使用immutable来优化redux的核心
 - 组件props是通过redux的connect从state中获得的，并且引入immutablejs的另一个目的是减少组件shouldComponentUpdate中不必要渲染，shouldComponentUpdate中比对的是props，如果props是原生js就失去了优化的意义
@@ -114,7 +121,9 @@ react有个重要的性能优化的点就是shouldComponentUpdate，返回true�
 - 与服务端ajax交互的数据为原生js数据，需要转换成immutable数据
 从上面这些点可以看出，几乎整个项目都是必须使用immutable的，只有在少数与外部依赖有交互的地方使用了原生js。这么做的目的其实就是为了防止在大型项目中，原生js与immutable混用，导致自己都不清楚一个变量中存储的到底是什么类型的数据。
 `Note：fromJS() 和 toJS() 是深层的互转immutable对象和原生对象，性能开销大，尽量不要使用。`
+
 ##### 5.2 具体实现
+
 - **redux-immutable**
 redux中利用combineReducers来合并reducer并初始化state，redux自带的combineReducers只支持state是原生js形式的，所以需要使用redux-immutable提供的combineReducers来替换原来的方法。
 ```
@@ -220,7 +229,9 @@ class People extends BaseComponent {
     …………
 }
 ```
+
 #### 6. immutable.js使用过程中的一些注意点
+
 - fromJS和toJS会深度转换数据，随之带来的开销较大，尽可能避免使用，单层数据转换使用Map()和List()
 - Map类型的key必须是string
 - 所有针对immutable变量的增删改必须左边有赋值，因为所有操作都不会改变原来的值，只是生成一个新的变量
@@ -251,6 +262,8 @@ const newArr = [].concat([1, 2, 3]);
 - immutable对象直接可以转JSON.stringify(),不需要显式手动调用toJS()转原生
 - 判断对象是否是空可以直接用size
 - 调试过程中要看一个immutable变量中真实的值，可以chrome中加断点，在console中使用.toJS()方法来查看
+
 #### 7. 总结
+
 总的来说immutable.js完美的契合了react+redux的state流处理，redux的宗旨就是单一数据流，可追溯，这两点恰恰是immutable.js的优势。当然也不是所有使用react+redux的场景都需要使用immutable.js，**建议满足项目足够大，state结构足够复杂的原则**，小项目可以手动处理shouldComponentUpdate，不建议使用，得不偿失。
 
